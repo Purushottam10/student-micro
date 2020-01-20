@@ -2,10 +2,13 @@ package com.dz.student.config;
 
 import org.keycloak.adapters.KeycloakConfigResolver;
 import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;
+import org.keycloak.adapters.springsecurity.KeycloakSecurityComponents;
 import org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationProvider;
 import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurerAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,8 +20,9 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 
 @Configuration
 @EnableWebSecurity
-
-public class KeyCloakSecurity extends KeycloakWebSecurityConfigurerAdapter {
+@EnableAutoConfiguration
+@ComponentScan(basePackageClasses = KeycloakSecurityComponents.class)
+public class StudentKeyCloakSecurity extends KeycloakWebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -27,13 +31,14 @@ public class KeyCloakSecurity extends KeycloakWebSecurityConfigurerAdapter {
         auth.authenticationProvider(keycloakAuthenticationProvider);
     }
 
+
     /**
      * Defines the session authentication strategy.
      */
     @Bean
     @Override
     protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
-        return new RegisterSessionAuthenticationStrategy(new SessionRegistryImpl());
+        return  new RegisterSessionAuthenticationStrategy(new SessionRegistryImpl());
     }
 
     @Bean
@@ -45,7 +50,9 @@ public class KeyCloakSecurity extends KeycloakWebSecurityConfigurerAdapter {
         super.configure(http);
         http
                 .authorizeRequests()
-                .antMatchers("/student*").hasRole("user")
-                .anyRequest().permitAll();
+                .antMatchers("/student*")
+                .hasRole("user")
+                .anyRequest()
+                .permitAll();
     }
 }

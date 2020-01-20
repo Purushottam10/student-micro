@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @SpringBootApplication
 @EnableMongoRepositories(basePackages = "com.dz.student.repository")
 @ComponentScan(basePackages = {"com.dz.student"})
-public class StudentServiceApplication extends SpringBootServletInitializer {
+public class StudentServiceApplication  {
 
 	public static void main(String[] args) {
 		SpringApplication.run(StudentServiceApplication.class, args);
