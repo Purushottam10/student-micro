@@ -3,7 +3,6 @@ package com.dz.student.model;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.io.Serializable;
 
@@ -16,5 +15,7 @@ public class IdentityModel implements Serializable {
    private long createdAt;
    private long updatedAt;
    private boolean delete = false;
+
+
    
 }

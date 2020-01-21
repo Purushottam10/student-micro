@@ -5,6 +5,7 @@ import com.dz.student.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -18,6 +19,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student save(Student student) {
+        student.setCreatedAt(new Date().getTime());
         return studentRepository.save(student);
     }
 
