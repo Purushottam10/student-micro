@@ -4,10 +4,12 @@ import com.dz.student.Constant;
 import com.dz.student.model.Student;
 import com.dz.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping(Constant.API_BASE_URL+"/student")
 public class StudentController {
