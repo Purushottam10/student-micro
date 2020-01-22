@@ -34,6 +34,5 @@ public class StudentKeyCloakSecurity extends KeycloakWebSecurityConfigurerAdapte
                 .antMatchers("/student*").hasRole("user")
                 .anyRequest()
                 .permitAll();
-//                .authenticated();
     }
 }
